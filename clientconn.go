@@ -1342,9 +1342,9 @@ func (ac *addrConn) getReadyTransport() (transport.ClientTransport, bool) {
 // tight loop.
 // tearDown doesn't remove ac from ac.cc.conns.
 func (ac *addrConn) tearDown(err error) {
-	ac.cancel()
 	ac.mu.Lock()
 	defer ac.mu.Unlock()
+	ac.cancel()
 	if ac.state == connectivity.Shutdown {
 		return
 	}
